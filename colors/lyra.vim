@@ -151,7 +151,7 @@ else
         call s:hi('String',       s:cyan,      s:darkest, 'NONE')
         call s:hi('SpecialChar',  s:br_yellow, s:darkest, 'italic')
     else
-        call s:hi('String',       s:br_cyan,   s:none, 'NONE')
+        call s:hi('String',       s:cyan,   s:none, 'NONE')
         call s:hi('SpecialChar',  s:br_yellow, s:none, 'italic')
     endif
     
@@ -204,14 +204,24 @@ endif
     call s:hi('Warning',      s:yellow,     s:none,       'NONE')
 
     call s:hi('Folded',       s:white,      s:black,      'NONE')
-    call s:hi('SignColumn',   s:white,      s:hard_black, 'NONE')
+    call s:hi('SignColumn',   s:white,      s:none, 'NONE')
     call s:hi('LineNr',       s:light,      s:none,       'NONE')
     call s:hi('CursorLineNr', s:red,        s:none,       'NONE')
-    call s:hi('DiffDelete',   s:none,       s:red,        'none')
-    call s:hi('DiffAdd',      s:none,       s:green,      'none')
-    call s:hi('DiffChange',   s:none,       s:cyan,       'none')
-    call s:hi('DiffText',     s:none,       s:br_yellow,  'none')
+    call s:hi('DiffDelete',   s:light, s:br_red,     'none')
+    call s:hi('DiffAdd',      s:light, s:br_green,   'none')
+    call s:hi('DiffChange',   s:light, s:br_yellow,  'none')
+    call s:hi('DiffText',     s:light, s:br_yellow,  'none')
     call s:hi('EndOfBuffer',  s:black,      s:hard_black, 'none')
+
+    " vim-gitgutter
+    call s:hi('GitGutterDeleteLine',       s:dark, s:br_red,    'none')
+    call s:hi('GitGutterAddLine',          s:dark, s:br_green,  'none')
+    call s:hi('GitGutterChangeLine',       s:dark, s:br_yellow, 'none')
+    call s:hi('GitGutterChangeDeleteLine', s:dark, s:br_yellow, 'none')
+    hi! link GitGutterAddLineNr GitGutterAddLine
+    hi! link GitGutterDeleteLineNr GitGutterDeleteLine
+    hi! link GitGutterChangeLineNr GitGutterChangeLine
+    hi! link GitGutterChangeDeleteLineNr GitGutterChangeDeleteLine
 
     " conflict-marker.vim
     call s:hi('ConflictMarkerBegin',     s:br_cyan, s:none,       'bold')
