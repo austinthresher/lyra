@@ -37,7 +37,7 @@ function! s:hi(group, fg, bg, attr)
 endfunc
 
 " Set palette based on t_Co
-if &t_Co || &termguicolors
+if &t_Co || &termguicolors || has('gui_running')
     if &t_Co < 16 || &t_Co is# ''
         let s:pal = range(0, 7) + range(0, 7)
         let s:grays = [0, 0, 0, 0, 0, 7, 7, 7, 7]
@@ -116,10 +116,12 @@ let s:lightest   = ['#BCBCBC', s:xterm_lightest]
 let s:none = ['NONE', 'NONE']
 
 " Highlights
-if exists('g:lyra_transparent') && g:lyra_transparent
+if exists('g:lyra_transparent') && g:lyra_transparent&& !has('gui_running')
     call s:hi('Normal', s:br_white, s:none, 'NONE')
+    call s:hi('EndOfBuffer',  s:black,      s:none, 'NONE')
 else
     call s:hi('Normal', s:br_white, s:black, 'NONE')
+    call s:hi('EndOfBuffer',  s:black,      s:hard_black, 'NONE')
 endif
 
 " We control syntax highlighting ourselves
@@ -211,7 +213,6 @@ endif
     call s:hi('DiffAdd',      s:light,      s:br_green,   'NONE')
     call s:hi('DiffChange',   s:light,      s:br_yellow,  'NONE')
     call s:hi('DiffText',     s:light,      s:br_yellow,  'NONE')
-    call s:hi('EndOfBuffer',  s:black,      s:hard_black, 'NONE')
 
     " vim-gitgutter
     call s:hi('GitGutterDeleteLine',       s:dark, s:br_red,    'NONE')
