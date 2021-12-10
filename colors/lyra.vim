@@ -194,8 +194,8 @@ endif
 
     call s:hi('MatchParen',   s:br_magenta, s:none,       'bold')
     call s:hi('Conceal',      s:darker,     s:none,       'NONE')
-    call s:hi('StatusLine',   s:br_white,   s:darkest,    'NONE')
-    call s:hi('StatusLineNC', s:dark,       s:hard_black, 'NONE')
+    call s:hi('StatusLine',   s:br_white,   s:darker,    'NONE')
+    call s:hi('StatusLineNC', s:dark,       s:darkest, 'NONE')
     call s:hi('VertSplit',    s:br_white,   s:none,       'NONE')
     call s:hi('WildMenu',     s:blue,       s:black,      'bold')
     call s:hi('ErrorMsg',     s:br_white,   s:red,        'NONE')
