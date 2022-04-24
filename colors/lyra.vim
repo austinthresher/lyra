@@ -40,10 +40,10 @@ endfunc
 if &t_Co || &termguicolors
     if &t_Co < 16 || &t_Co is# ''
         let s:pal = range(0, 7) + range(0, 7)
-        let s:grays = [0, 0, 0, 0, 0, 7, 7, 7, 7]
+        let s:grays = [0, 0, 0, 0, 0, 0, 7, 7, 7, 7]
     elseif &t_Co < 256
         let s:pal = range(0, 15)
-        let s:grays = [0, 8, 8, 8, 7, 7, 7, 7, 15]
+        let s:grays = [0, 0, 8, 8, 8, 7, 7, 7, 7, 15]
     else
         if exists('g:lyra_use_system_colors') && g:lyra_use_system_colors
             let s:pal = [   0,   1,   2,   3,   4,   5,   6,   7,
@@ -52,7 +52,7 @@ if &t_Co || &termguicolors
             let s:pal = [ 233,  52,  22, 208,  32, 199,  49, 252,
                         \  59, 196,  41, 220,  45, 170, 159, 231]
         endif
-        let s:grays = [ 232, 235, 237, 239, 243, 245, 247 ]
+        let s:grays = [0, 232, 235, 237, 239, 243, 245, 247]
     endif
 else
     finish
@@ -79,14 +79,15 @@ let s:xterm_br_cyan    = s:pal[14]
 let s:xterm_br_white   = s:pal[15]
 " Darker than black
 let s:xterm_hard_black = s:grays[0]
+let s:xterm_blacker    = s:grays[1]
 " Darker than br_black, lighter than black
-let s:xterm_darkest    = s:grays[1]
-let s:xterm_darker     = s:grays[2]
-let s:xterm_dark       = s:grays[3]
+let s:xterm_darkest    = s:grays[2]
+let s:xterm_darker     = s:grays[3]
+let s:xterm_dark       = s:grays[4]
 " Lighter than br_black, darker than white
-let s:xterm_light      = s:grays[4]
-let s:xterm_lighter    = s:grays[5]
-let s:xterm_lightest   = s:grays[6]
+let s:xterm_light      = s:grays[5]
+let s:xterm_lighter    = s:grays[6]
+let s:xterm_lightest   = s:grays[7]
 
 " Associate truecolor values with color names
 let s:black      = ['#121212', s:xterm_black]
@@ -105,7 +106,8 @@ let s:br_blue    = ['#00DFFF', s:xterm_br_blue]
 let s:br_magenta = ['#DF5FDF', s:xterm_br_magenta]
 let s:br_cyan    = ['#AFFFFF', s:xterm_br_cyan]
 let s:br_white   = ['#FFFFFF', s:xterm_br_white]
-let s:hard_black = ['#080808', s:xterm_hard_black]
+let s:blacker    = ['#080808', s:xterm_blacker]
+let s:hard_black = ['#000000', s:xterm_hard_black]
 let s:darkest    = ['#1C1C1C', s:xterm_darkest]
 let s:darker     = ['#262626', s:xterm_darker]
 let s:dark       = ['#3A3A3A', s:xterm_dark]
@@ -115,16 +117,29 @@ let s:lightest   = ['#BCBCBC', s:xterm_lightest]
 
 let s:none = ['NONE', 'NONE']
 
-" Highlights
-if exists('g:lyra_transparent') && g:lyra_transparent
-    call s:hi('Normal', s:br_white, s:none, 'NONE')
-else
-    call s:hi('Normal', s:br_white, s:black, 'NONE')
-endif
+
 
 " We control syntax highlighting ourselves
 syntax on 
 
+
+let transparent = exists('g:lyra_transparent') && g:lyra_transparent
+let dim_inactive = has('nvim') && !transparent
+            \ && exists('g:lyra_dim_inactive') && g:lyra_dim_inactive
+if dim_inactive
+    call s:hi('NormalFocused', s:br_white, s:hard_black, 'NONE')
+    call s:hi('NormalUnfocused', s:white, s:blacker, 'NONE')
+    set winhl=Normal:NormalFocused,NormalNC:NormalUnfocused
+else
+    if transparent
+        call s:hi('Normal', s:br_white, s:none, 'NONE')
+    else
+        call s:hi('Normal', s:br_white, s:black, 'NONE')
+    endif
+endif
+
+
+" Highlights
 if exists('g:lyra_no_highlighting') && g:lyra_no_highlighting
     call s:hi('Comment',      s:green,   s:none,       'NONE')
     for group in ['Constant', 'Character', 'Boolean', 'Number', 'Float',
@@ -175,7 +190,7 @@ else
 endif 
 
 " Shared between syntax on / off {{{
-    call s:hi('Cursor', s:black, s:yellow, 'NONE')
+    call s:hi('Cursor', s:none, s:none, 'reverse')
     hi! link vCursor Cursor
     hi! link iCursor Cursor
     hi! link lCursor Cursor
@@ -186,9 +201,9 @@ endif
     call s:hi('Search', s:hard_black, s:light, 'NONE')
     call s:hi('IncSearch', s:hard_black, s:br_yellow, 'NONE')
 
-    call s:hi('Pmenu',        s:white,      s:hard_black,   'NONE')
+    call s:hi('Pmenu',        s:white,      s:hard_black, 'NONE')
     call s:hi('PmenuSel',     s:br_white,   s:magenta,    'bold')
-    call s:hi('CursorLine', s:hard_black, s:green, 'bold')
+    "call s:hi('CursorLine',   s:none,       s:none,       'underline')
 
     call s:hi('MatchParen',   s:br_magenta, s:none,       'bold')
     call s:hi('Conceal',      s:darker,     s:none,       'NONE')
