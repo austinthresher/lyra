@@ -37,7 +37,7 @@ function! s:hi(group, fg, bg, attr)
 endfunc
 
 " Set palette based on t_Co
-if &t_Co || &termguicolors
+if &t_Co || &termguicolors || has('gui_running')
     if &t_Co < 16 || &t_Co is# ''
         let s:pal = range(0, 7) + range(0, 7)
         let s:grays = [0, 0, 0, 0, 0, 0, 7, 7, 7, 7]
@@ -117,11 +117,17 @@ let s:lightest   = ['#BCBCBC', s:xterm_lightest]
 
 let s:none = ['NONE', 'NONE']
 
-
+" Highlights
+if exists('g:lyra_transparent') && g:lyra_transparent&& !has('gui_running')
+    call s:hi('Normal', s:br_white, s:none, 'NONE')
+    call s:hi('EndOfBuffer',  s:black,      s:none, 'NONE')
+else
+    call s:hi('Normal', s:br_white, s:black, 'NONE')
+    call s:hi('EndOfBuffer',  s:black,      s:hard_black, 'NONE')
+endif
 
 " We control syntax highlighting ourselves
 syntax on 
-
 
 let transparent = exists('g:lyra_transparent') && g:lyra_transparent
 let dim_inactive = has('nvim') && !transparent
@@ -207,8 +213,8 @@ endif
 
     call s:hi('MatchParen',   s:br_magenta, s:none,       'bold')
     call s:hi('Conceal',      s:darker,     s:none,       'NONE')
-    call s:hi('StatusLine',   s:br_white,   s:darkest,    'NONE')
-    call s:hi('StatusLineNC', s:dark,       s:hard_black, 'NONE')
+    call s:hi('StatusLine',   s:br_white,   s:darker,    'NONE')
+    call s:hi('StatusLineNC', s:dark,       s:darkest, 'NONE')
     call s:hi('VertSplit',    s:br_white,   s:none,       'NONE')
     call s:hi('WildMenu',     s:blue,       s:black,      'bold')
     call s:hi('ErrorMsg',     s:br_white,   s:red,        'NONE')
@@ -226,7 +232,6 @@ endif
     call s:hi('DiffAdd',      s:light,      s:br_green,   'NONE')
     call s:hi('DiffChange',   s:light,      s:br_yellow,  'NONE')
     call s:hi('DiffText',     s:light,      s:br_yellow,  'NONE')
-    call s:hi('EndOfBuffer',  s:black,      s:hard_black, 'NONE')
 
     " vim-gitgutter
     call s:hi('GitGutterDeleteLine',       s:dark, s:br_red,    'NONE')
