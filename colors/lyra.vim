@@ -105,9 +105,9 @@ let s:br_yellow  = ['#FFDF00', s:xterm_br_yellow]
 let s:br_blue    = ['#00DFFF', s:xterm_br_blue]
 let s:br_magenta = ['#DF5FDF', s:xterm_br_magenta]
 let s:br_cyan    = ['#AFFFFF', s:xterm_br_cyan]
-let s:br_white   = ['#FFFFFF', s:xterm_br_white]
+let s:br_white   = ['#EEEEEE', s:xterm_br_white]
 let s:blacker    = ['#080808', s:xterm_blacker]
-let s:hard_black = ['#000000', s:xterm_hard_black]
+let s:hard_black = ['#010101', s:xterm_hard_black]
 let s:darkest    = ['#1C1C1C', s:xterm_darkest]
 let s:darker     = ['#262626', s:xterm_darker]
 let s:dark       = ['#3A3A3A', s:xterm_dark]
@@ -117,14 +117,6 @@ let s:lightest   = ['#BCBCBC', s:xterm_lightest]
 
 let s:none = ['NONE', 'NONE']
 
-" Highlights
-if exists('g:lyra_transparent') && g:lyra_transparent&& !has('gui_running')
-    call s:hi('Normal', s:br_white, s:none, 'NONE')
-    call s:hi('EndOfBuffer',  s:black,      s:none, 'NONE')
-else
-    call s:hi('Normal', s:br_white, s:black, 'NONE')
-    call s:hi('EndOfBuffer',  s:black,      s:hard_black, 'NONE')
-endif
 
 " We control syntax highlighting ourselves
 syntax on 
@@ -133,8 +125,8 @@ let transparent = exists('g:lyra_transparent') && g:lyra_transparent
 let dim_inactive = has('nvim') && !transparent
             \ && exists('g:lyra_dim_inactive') && g:lyra_dim_inactive
 if dim_inactive
-    call s:hi('NormalFocused', s:br_white, s:hard_black, 'NONE')
-    call s:hi('NormalUnfocused', s:white, s:blacker, 'NONE')
+    call s:hi('NormalFocused', s:br_white, s:black, 'NONE')
+    call s:hi('NormalUnfocused', s:white, s:darker, 'NONE')
     set winhl=Normal:NormalFocused,NormalNC:NormalUnfocused
 else
     if transparent
@@ -143,7 +135,6 @@ else
         call s:hi('Normal', s:br_white, s:black, 'NONE')
     endif
 endif
-
 
 " Highlights
 if exists('g:lyra_no_highlighting') && g:lyra_no_highlighting
@@ -209,12 +200,11 @@ endif
 
     call s:hi('Pmenu',        s:white,      s:hard_black, 'NONE')
     call s:hi('PmenuSel',     s:br_white,   s:magenta,    'bold')
-    "call s:hi('CursorLine',   s:none,       s:none,       'underline')
 
     call s:hi('MatchParen',   s:br_magenta, s:none,       'bold')
     call s:hi('Conceal',      s:darker,     s:none,       'NONE')
-    call s:hi('StatusLine',   s:br_white,   s:darker,    'NONE')
-    call s:hi('StatusLineNC', s:dark,       s:darkest, 'NONE')
+    call s:hi('StatusLine',   s:br_white,   s:darker,     'NONE')
+    call s:hi('StatusLineNC', s:dark,       s:darkest,    'NONE')
     call s:hi('VertSplit',    s:br_white,   s:none,       'NONE')
     call s:hi('WildMenu',     s:blue,       s:black,      'bold')
     call s:hi('ErrorMsg',     s:br_white,   s:red,        'NONE')
@@ -232,6 +222,10 @@ endif
     call s:hi('DiffAdd',      s:light,      s:br_green,   'NONE')
     call s:hi('DiffChange',   s:light,      s:br_yellow,  'NONE')
     call s:hi('DiffText',     s:light,      s:br_yellow,  'NONE')
+
+    call s:hi('TabLine',      s:light,      s:dark,       'NONE')
+    call s:hi('TabLineFill',  s:light,      s:darker,     'NONE')
+    call s:hi('TabLineSel',   s:br_white,   s:black,      'bold')
 
     " vim-gitgutter
     call s:hi('GitGutterDeleteLine',       s:dark, s:br_red,    'NONE')
