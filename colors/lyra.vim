@@ -258,16 +258,4 @@ endif
     for group in ['NonText', 'SpecialKey']
         call s:hi(group, s:light, s:none, 'NONE')
     endfor
-
-    call s:hi('QuickFixLine', s:none, s:black, 'NONE')
-    augroup QuickFixColors
-	autocmd!
-	autocmd Syntax qf syntax match qfWarning "warning" contained nextGroup=qfSeparator
-	autocmd Syntax qf syntax match qfLineNr "[^|]*" contained contains=qfError,qfWarning
-	autocmd Syntax qf syntax match clangTidyCheck "\[.*\]$"
-	autocmd Syntax qf highlight link clangTidyCheck Conceal
-	autocmd Syntax qf highlight link qfFileName cIncluded
-	autocmd Syntax qf highlight link qfWarning Warning 
-	autocmd Syntax qf highlight link qfSeparator Normal
-    augroup END
 " }}}
