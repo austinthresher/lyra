@@ -119,7 +119,7 @@ let s:none = ['NONE', 'NONE']
 
 
 " We control syntax highlighting ourselves
-syntax on 
+syntax on
 
 let transparent = exists('g:lyra_transparent') && g:lyra_transparent
 let dim_inactive = has('nvim') && !transparent
@@ -140,25 +140,25 @@ endif
 if exists('g:lyra_no_highlighting') && g:lyra_no_highlighting
     call s:hi('Comment',      s:green,   s:none,       'NONE')
     for group in ['Constant', 'Character', 'Boolean', 'Number', 'Float',
-		\ 'Statement', 'Conditional', 'Repeat', 'Label', 'Exception',
-		\ 'Keyword', 'String', 'SpecialChar', 'Operator',
-		\ 'Todo', 'Error', 'Type', 'StorageClass', 'Typedef',
-		\ 'Structure', 'Delimiter', 'Identifier', 'PreProc',
-		\ 'Include', 'Define', 'PreCondit', 'cIncluded', 'Function',
-		\ 'Macro', 'Special' ]
-	call s:hi(group, s:none, s:none, 'NONE')
+                \ 'Statement', 'Conditional', 'Repeat', 'Label', 'Exception',
+                \ 'Keyword', 'String', 'SpecialChar', 'Operator',
+                \ 'Todo', 'Error', 'Type', 'StorageClass', 'Typedef',
+                \ 'Structure', 'Delimiter', 'Identifier', 'PreProc',
+                \ 'Include', 'Define', 'PreCondit', 'cIncluded', 'Function',
+                \ 'Macro', 'Special' ]
+        call s:hi(group, s:none, s:none, 'NONE')
     endfor
-else 
+else
     call s:hi('Comment', s:br_green, s:none, 'italic')
     for group in ['Constant', 'Character', 'Boolean', 'Number', 'Float']
         call s:hi(group, s:br_red, s:none, 'NONE')
     endfor
-    
+
     for group in ['Statement', 'Conditional', 'Repeat', 'Label',
                 \ 'Exception', 'Keyword']
         call s:hi(group, s:blue, s:none, 'bold')
     endfor
-    
+
     if exists('g:lyra_string_bg') && g:lyra_string_bg
         call s:hi('String',       s:cyan,      s:darkest, 'NONE')
         call s:hi('SpecialChar',  s:br_yellow, s:darkest, 'italic')
@@ -166,7 +166,7 @@ else
         call s:hi('String',       s:cyan,   s:none, 'NONE')
         call s:hi('SpecialChar',  s:br_yellow, s:none, 'italic')
     endif
-    
+
     call s:hi('Operator',     s:white,      s:none,       'NONE')
     call s:hi('Todo',         s:br_yellow,  s:black,      'bold')
     call s:hi('Error',        s:br_red,     s:none,       'bold')
@@ -245,29 +245,28 @@ endif
     call s:hi('ConflictMarkerEnd',       s:br_magenta, s:none,       'bold')
 
     if has('spell')
-	call s:hi('SpellCap',   s:none, s:magenta, 'underline')
-	call s:hi('SpellBad',   s:none, s:red,     'underline')
-	call s:hi('SpellLocal', s:none, s:yellow,  'underline')
-	call s:hi('SpellRare',  s:none, s:cyan,    'underline')
+        call s:hi('SpellCap',   s:none, s:magenta, 'underline')
+        call s:hi('SpellBad',   s:none, s:red,     'underline')
+        call s:hi('SpellLocal', s:none, s:yellow,  'underline')
+        call s:hi('SpellRare',  s:none, s:cyan,    'underline')
     endif
 
     if has('terminal')
-	call s:hi('Terminal', s:br_white, s:hard_black, 'NONE')
+        call s:hi('Terminal', s:br_white, s:hard_black, 'NONE')
     endif
 
-    for group in ['NonText', 'SpecialKey']
-        call s:hi(group, s:light, s:none, 'NONE')
-    endfor
+    call s:hi('NonText', s:dark, s:none, 'NONE')
+    call s:hi('SpecialKey', s:darkest, s:none, 'NONE')
 
     call s:hi('QuickFixLine', s:none, s:black, 'NONE')
     augroup QuickFixColors
-	autocmd!
-	autocmd Syntax qf syntax match qfWarning "warning" contained nextGroup=qfSeparator
-	autocmd Syntax qf syntax match qfLineNr "[^|]*" contained contains=qfError,qfWarning
-	autocmd Syntax qf syntax match clangTidyCheck "\[.*\]$"
-	autocmd Syntax qf highlight link clangTidyCheck Conceal
-	autocmd Syntax qf highlight link qfFileName cIncluded
-	autocmd Syntax qf highlight link qfWarning Warning 
-	autocmd Syntax qf highlight link qfSeparator Normal
+        autocmd!
+        autocmd Syntax qf syntax match qfWarning "warning" contained nextGroup=qfSeparator
+        autocmd Syntax qf syntax match qfLineNr "[^|]*" contained contains=qfError,qfWarning
+        autocmd Syntax qf syntax match clangTidyCheck "\[.*\]$"
+        autocmd Syntax qf highlight link clangTidyCheck Conceal
+        autocmd Syntax qf highlight link qfFileName cIncluded
+        autocmd Syntax qf highlight link qfWarning Warning 
+        autocmd Syntax qf highlight link qfSeparator Normal
     augroup END
 " }}}
