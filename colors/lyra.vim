@@ -184,7 +184,7 @@ else
     call s:hi('Function',     s:magenta,    s:none,       'NONE')
     call s:hi('Macro',        s:br_red,     s:none,       'NONE')
     call s:hi('Special',      s:yellow,     s:none,       'NONE')
-endif 
+endif
 
 " Shared between syntax on / off {{{
     call s:hi('Cursor', s:none, s:none, 'reverse')
@@ -202,7 +202,7 @@ endif
     call s:hi('PmenuSel',     s:br_white,   s:magenta,    'bold')
 
     call s:hi('MatchParen',   s:br_magenta, s:none,       'bold')
-    call s:hi('Conceal',      s:darker,     s:none,       'NONE')
+    call s:hi('Conceal',      s:dark,     s:none,       'NONE')
     call s:hi('StatusLine',   s:br_white,   s:darker,     'NONE')
     call s:hi('StatusLineNC', s:dark,       s:darkest,    'NONE')
     call s:hi('VertSplit',    s:br_white,   s:none,       'NONE')
@@ -216,8 +216,8 @@ endif
 
     call s:hi('Folded',       s:white,      s:black,      'NONE')
     call s:hi('SignColumn',   s:white,      s:hard_black, 'NONE')
-    call s:hi('LineNr',       s:lightest,   s:dark,       'NONE')
-    call s:hi('CursorLineNr', s:red,        s:none,       'NONE')
+    call s:hi('LineNr',       s:dark,       s:darkest,    'NONE')
+    call s:hi('CursorLineNr', s:dark,       s:black,      'bold')
     call s:hi('DiffDelete',   s:light,      s:br_red,     'NONE')
     call s:hi('DiffAdd',      s:light,      s:br_green,   'NONE')
     call s:hi('DiffChange',   s:light,      s:br_yellow,  'NONE')
@@ -226,6 +226,13 @@ endif
     call s:hi('TabLine',      s:light,      s:dark,       'NONE')
     call s:hi('TabLineFill',  s:light,      s:darker,     'NONE')
     call s:hi('TabLineSel',   s:br_white,   s:black,      'bold')
+
+    " Dirvish
+    call s:hi('DirvishSuffix', s:light, s:none, 'NONE')
+
+    " coc.nvim
+    " coc requires only setting the bg color
+    exec 'hi CocMenuSel guibg=' .. s:dark[0] .. " gui='bold'"
 
     " vim-gitgutter
     call s:hi('GitGutterDeleteLine',       s:dark, s:br_red,    'NONE')
