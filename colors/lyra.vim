@@ -115,6 +115,11 @@ let s:light      = ['#808080', s:xterm_light]
 let s:lighter    = ['#9E9E9E', s:xterm_lighter]
 let s:lightest   = ['#BCBCBC', s:xterm_lightest]
 
+" Only used for CoC diagnostics
+let s:error = '#550000'
+let s:warning = '#442200'
+let s:info = s:darker[0]
+
 let s:none = ['NONE', 'NONE']
 
 
@@ -231,8 +236,12 @@ endif
     call s:hi('DirvishSuffix', s:light, s:none, 'NONE')
 
     " coc.nvim
+    " TODO: Add a function to only set BG / FG / etc
     " coc requires only setting the bg color
     exec 'hi CocMenuSel guibg=' .. s:dark[0] .. " gui='bold'"
+    exec 'hi CocErrorHighlight guibg=' .. s:error .. " gui='underline'"
+    exec 'hi CocWarningHighlight guibg=' .. s:warning .. " gui='underline'"
+    exec 'hi CocInfoHighlight guibg=' .. s:info .. " gui='underline'"
 
     " vim-gitgutter
     call s:hi('GitGutterDeleteLine',       s:dark, s:br_red,    'NONE')
