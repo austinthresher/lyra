@@ -91,17 +91,17 @@ let s:xterm_lightest   = s:grays[7]
 
 " Associate truecolor values with color names
 let s:black      = ['#121212', s:xterm_black]
-let s:red        = ['#5F0000', s:xterm_red]
+let s:red        = ['#CC2222', s:xterm_red]
 let s:green      = ['#005F00', s:xterm_green]
 let s:yellow     = ['#FF8700', s:xterm_yellow]
 let s:blue       = ['#0087DF', s:xterm_blue]
-let s:magenta    = ['#FF00AF', s:xterm_magenta]
+let s:magenta    = ['#AF22DF', s:xterm_magenta]
 let s:cyan       = ['#00FFAF', s:xterm_cyan]
 let s:white      = ['#D0D0D0', s:xterm_white]
 let s:br_black   = ['#5F5F5F', s:xterm_br_black]
-let s:br_red     = ['#FF0000', s:xterm_br_red]
+let s:br_red     = ['#FF4444', s:xterm_br_red]
 let s:br_green   = ['#00DF5F', s:xterm_br_green]
-let s:br_yellow  = ['#FFDF00', s:xterm_br_yellow]
+let s:br_yellow  = ['#FFBD44', s:xterm_br_yellow]
 let s:br_blue    = ['#00DFFF', s:xterm_br_blue]
 let s:br_magenta = ['#DF5FDF', s:xterm_br_magenta]
 let s:br_cyan    = ['#AFFFFF', s:xterm_br_cyan]
@@ -166,10 +166,10 @@ else
 
     if exists('g:lyra_string_bg') && g:lyra_string_bg
         call s:hi('String',       s:cyan,      s:darkest, 'NONE')
-        call s:hi('SpecialChar',  s:br_yellow, s:darkest, 'italic')
+        call s:hi('SpecialChar',  s:br_yellow, s:darkest, 'bold')
     else
         call s:hi('String',       s:cyan,   s:none, 'NONE')
-        call s:hi('SpecialChar',  s:br_yellow, s:none, 'italic')
+        call s:hi('SpecialChar',  s:br_yellow, s:none, 'bold')
     endif
 
     call s:hi('Operator',     s:white,      s:none,       'NONE')
@@ -186,7 +186,7 @@ else
     call s:hi('Define',       s:yellow,     s:none,       'NONE')
     call s:hi('PreCondit',    s:yellow,     s:none,       'NONE')
     call s:hi('cIncluded',    s:br_cyan,    s:none,       'italic')
-    call s:hi('Function',     s:magenta,    s:none,       'NONE')
+    call s:hi('Function',     s:br_magenta,    s:none,       'NONE')
     call s:hi('Macro',        s:br_red,     s:none,       'NONE')
     call s:hi('Special',      s:yellow,     s:none,       'NONE')
 endif
