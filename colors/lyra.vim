@@ -90,34 +90,65 @@ let s:xterm_lighter    = s:grays[6]
 let s:xterm_lightest   = s:grays[7]
 
 " Associate truecolor values with color names
-let s:black      = ['#121212', s:xterm_black]
-let s:red        = ['#CC2222', s:xterm_red]
-let s:green      = ['#005F00', s:xterm_green]
-let s:yellow     = ['#FF8700', s:xterm_yellow]
-let s:blue       = ['#0087DF', s:xterm_blue]
-let s:magenta    = ['#AF22DF', s:xterm_magenta]
-let s:cyan       = ['#00FFAF', s:xterm_cyan]
-let s:white      = ['#D0D0D0', s:xterm_white]
-let s:br_black   = ['#5F5F5F', s:xterm_br_black]
-let s:br_red     = ['#FF4444', s:xterm_br_red]
-let s:br_green   = ['#00DF5F', s:xterm_br_green]
-let s:br_yellow  = ['#FFBD44', s:xterm_br_yellow]
-let s:br_blue    = ['#00DFFF', s:xterm_br_blue]
-let s:br_magenta = ['#DF5FDF', s:xterm_br_magenta]
-let s:br_cyan    = ['#AFFFFF', s:xterm_br_cyan]
-let s:br_white   = ['#EEEEEE', s:xterm_br_white]
-let s:blacker    = ['#080808', s:xterm_blacker]
-let s:hard_black = ['#010101', s:xterm_hard_black]
-let s:darkest    = ['#1C1C1C', s:xterm_darkest]
-let s:darker     = ['#262626', s:xterm_darker]
-let s:dark       = ['#3A3A3A', s:xterm_dark]
-let s:light      = ['#808080', s:xterm_light]
-let s:lighter    = ['#9E9E9E', s:xterm_lighter]
-let s:lightest   = ['#BCBCBC', s:xterm_lightest]
+
+if exists('g:lyra_use_v1_colors') && g:lyra_use_v1_colors
+    let s:black      = ['#121212', s:xterm_black]
+    let s:red        = ['#CC2222', s:xterm_red]
+    let s:green      = ['#005F00', s:xterm_green]
+    let s:yellow     = ['#FF8700', s:xterm_yellow]
+    let s:blue       = ['#0087DF', s:xterm_blue]
+    let s:magenta    = ['#AF22DF', s:xterm_magenta]
+    let s:cyan       = ['#00FFAF', s:xterm_cyan]
+    let s:white      = ['#D0D0D0', s:xterm_white]
+    let s:br_black   = ['#5F5F5F', s:xterm_br_black]
+    let s:br_red     = ['#FF4444', s:xterm_br_red]
+    let s:br_green   = ['#00DF5F', s:xterm_br_green]
+    let s:br_yellow  = ['#FFBD44', s:xterm_br_yellow]
+    let s:br_blue    = ['#00DFFF', s:xterm_br_blue]
+    let s:br_magenta = ['#DF5FDF', s:xterm_br_magenta]
+    let s:br_cyan    = ['#AFFFFF', s:xterm_br_cyan]
+    let s:br_white   = ['#EEEEEE', s:xterm_br_white]
+
+    let s:blacker    = ['#080808', s:xterm_blacker]
+    let s:hard_black = ['#010101', s:xterm_hard_black]
+    let s:darkest    = ['#1C1C1C', s:xterm_darkest]
+    let s:darker     = ['#262626', s:xterm_darker]
+    let s:dark       = ['#3A3A3A', s:xterm_dark]
+    let s:light      = ['#808080', s:xterm_light]
+    let s:lighter    = ['#9E9E9E', s:xterm_lighter]
+    let s:lightest   = ['#BCBCBC', s:xterm_lightest]
+else
+    " Version 2 colors. Tried to be easier on the eyes and more subtle / desat
+    let s:black      = ['#121214', s:xterm_black]
+    let s:red        = ['#8C2D2D', s:xterm_red]
+    let s:green      = ['#608860', s:xterm_green]
+    let s:yellow     = ['#D3944D', s:xterm_yellow]
+    let s:blue       = ['#3B7EAA', s:xterm_blue]
+    let s:magenta    = ['#987CDA', s:xterm_magenta]
+    let s:cyan       = ['#1CB38B', s:xterm_cyan]
+    let s:white      = ['#A0A0A0', s:xterm_white]
+    let s:br_black   = ['#5F5F5F', s:xterm_br_black]
+    let s:br_red     = ['#D37474', s:xterm_br_red]
+    let s:br_green   = ['#76DE94', s:xterm_br_green]
+    let s:br_yellow  = ['#EAC871', s:xterm_br_yellow]
+    let s:br_blue    = ['#82CBFE', s:xterm_br_blue]
+    let s:br_magenta = ['#DE95DE', s:xterm_br_magenta]
+    let s:br_cyan    = ['#5BEBEB', s:xterm_br_cyan]
+    let s:br_white   = ['#EEEEEE', s:xterm_br_white]
+
+    let s:blacker    = ['#08080A', s:xterm_blacker]
+    let s:hard_black = ['#010103', s:xterm_hard_black]
+    let s:darkest    = ['#1C1C1F', s:xterm_darkest]
+    let s:darker     = ['#26262A', s:xterm_darker]
+    let s:dark       = ['#3A3A3F', s:xterm_dark]
+    let s:light      = ['#808088', s:xterm_light]
+    let s:lighter    = ['#9E9EAE', s:xterm_lighter]
+    let s:lightest   = ['#BCBCCC', s:xterm_lightest]
+endif
 
 " Only used for CoC diagnostics
-let s:error = '#550000'
-let s:warning = '#442200'
+let s:error = s:red[0]
+let s:warning = s:yellow[0]
 let s:info = s:darker[0]
 
 let s:none = ['NONE', 'NONE']
@@ -154,41 +185,41 @@ if exists('g:lyra_no_highlighting') && g:lyra_no_highlighting
         call s:hi(group, s:none, s:none, 'NONE')
     endfor
 else
-    call s:hi('Comment', s:br_green, s:none, 'italic')
-    for group in ['Constant', 'Character', 'Boolean', 'Number', 'Float']
+    call s:hi('Comment', s:green, s:none, 'italic')
+    for group in ['Character', 'Boolean', 'Number', 'Float']
         call s:hi(group, s:br_red, s:none, 'NONE')
     endfor
 
-    for group in ['Statement', 'Conditional', 'Repeat', 'Label',
-                \ 'Exception', 'Keyword']
+    for group in ['Statement', 'Conditional', 'Repeat', 'Label', 'Keyword', 'Exception']
         call s:hi(group, s:blue, s:none, 'bold')
     endfor
 
     if exists('g:lyra_string_bg') && g:lyra_string_bg
-        call s:hi('String',       s:cyan,      s:darkest, 'NONE')
-        call s:hi('SpecialChar',  s:br_yellow, s:darkest, 'bold')
+        call s:hi('String',       s:br_green,   s:darkest, 'NONE')
+        call s:hi('SpecialChar',  s:br_magenta, s:darkest, 'NONE')
     else
-        call s:hi('String',       s:cyan,   s:none, 'NONE')
-        call s:hi('SpecialChar',  s:br_yellow, s:none, 'bold')
+        call s:hi('String',       s:br_green,   s:none, 'NONE')
+        call s:hi('SpecialChar',  s:br_magenta, s:none, 'NONE')
     endif
 
     call s:hi('Operator',     s:white,      s:none,       'NONE')
-    call s:hi('Todo',         s:br_yellow,  s:black,      'bold')
+    call s:hi('Todo',         s:br_yellow,  s:black,      'NONE')
     call s:hi('Error',        s:br_red,     s:none,       'bold')
-    call s:hi('Type',         s:br_blue,    s:none,       'NONE')
-    call s:hi('StorageClass', s:br_blue,    s:none,       'NONE')
-    call s:hi('Typedef',      s:br_blue,    s:none,       'NONE')
-    call s:hi('Structure',    s:br_blue,    s:none,       'NONE')
+    call s:hi('Type',         s:br_yellow,  s:none,       'NONE')
+    call s:hi('StorageClass', s:br_yellow,  s:none,       'NONE')
+    call s:hi('Typedef',      s:br_yellow,  s:none,       'NONE')
+    call s:hi('Structure',    s:br_yellow,  s:none,       'NONE')
     call s:hi('Delimiter',    s:white,      s:none,       'NONE')
     call s:hi('Identifier',   s:br_white,   s:none,       'NONE')
     call s:hi('PreProc',      s:yellow,     s:none,       'NONE')
     call s:hi('Include',      s:yellow,     s:none,       'NONE')
-    call s:hi('Define',       s:yellow,     s:none,       'NONE')
+    call s:hi('Define',       s:magenta,    s:none,       'NONE')
     call s:hi('PreCondit',    s:yellow,     s:none,       'NONE')
-    call s:hi('cIncluded',    s:br_cyan,    s:none,       'italic')
-    call s:hi('Function',     s:br_magenta,    s:none,       'NONE')
-    call s:hi('Macro',        s:br_red,     s:none,       'NONE')
-    call s:hi('Special',      s:yellow,     s:none,       'NONE')
+    call s:hi('cIncluded',    s:cyan,       s:none,       'italic')
+    call s:hi('Function',     s:br_blue,    s:none,       'NONE')
+    call s:hi('Macro',        s:magenta,    s:none,       'NONE')
+    call s:hi('Constant',     s:br_magenta, s:none,       'NONE')
+    call s:hi('Special',      s:br_cyan,    s:none,       'NONE')
 endif
 
 " Shared between syntax on / off {{{
@@ -204,10 +235,10 @@ endif
     call s:hi('IncSearch', s:hard_black, s:br_yellow, 'NONE')
 
     call s:hi('Pmenu',        s:white,      s:hard_black, 'NONE')
-    call s:hi('PmenuSel',     s:br_white,   s:magenta,    'bold')
+    call s:hi('PmenuSel',     s:black,      s:magenta,    'bold')
 
     call s:hi('MatchParen',   s:br_magenta, s:none,       'bold')
-    call s:hi('Conceal',      s:dark,     s:none,       'NONE')
+    call s:hi('Conceal',      s:dark,       s:none,       'NONE')
     call s:hi('StatusLine',   s:br_white,   s:darker,     'NONE')
     call s:hi('StatusLineNC', s:dark,       s:darkest,    'NONE')
     call s:hi('VertSplit',    s:br_white,   s:none,       'NONE')
@@ -236,9 +267,7 @@ endif
     call s:hi('DirvishSuffix', s:light, s:none, 'NONE')
 
     " coc.nvim
-    " TODO: Add a function to only set BG / FG / etc
-    " coc requires only setting the bg color
-    exec 'hi CocMenuSel guibg=' .. s:dark[0] .. " gui='bold'"
+    call s:hi('CocMenuSel', s:black, s:magenta, 'bold')
     exec 'hi CocErrorHighlight guibg=' .. s:error .. " gui='underline'"
     exec 'hi CocWarningHighlight guibg=' .. s:warning .. " gui='underline'"
     exec 'hi CocInfoHighlight guibg=' .. s:info .. " gui='underline'"
