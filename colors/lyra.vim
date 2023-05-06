@@ -206,7 +206,7 @@ endif
     call s:hi('Pmenu',        s:white,      s:hard_black, 'NONE')
     call s:hi('PmenuSel',     s:br_white,   s:magenta,    'bold')
 
-    call s:hi('MatchParen',   s:br_magenta, s:none,       'bold')
+    call s:hi('MatchParen',   s:br_red, s:none,       'bold')
     call s:hi('Conceal',      s:dark,     s:none,       'NONE')
     call s:hi('StatusLine',   s:br_white,   s:darker,     'NONE')
     call s:hi('StatusLineNC', s:dark,       s:darkest,    'NONE')
