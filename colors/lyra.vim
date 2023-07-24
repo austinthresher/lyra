@@ -146,10 +146,11 @@ else
     let s:lightest   = ['#BCBCCC', s:xterm_lightest]
 endif
 
-" Only used for CoC diagnostics
-let s:error = s:red[0]
-let s:warning = s:yellow[0]
-let s:info = s:darker[0]
+" Only used for CoC diagnostics. Should probably set cterm too.
+let s:hint = ["#0E0E0E", 7]
+let s:info = ["#0E0E0E", 7]
+let s:warning = ["#FFFF00", 11]
+let s:error = ["#FF0000", 9]
 
 let s:none = ['NONE', 'NONE']
 
@@ -204,7 +205,7 @@ else
 
     call s:hi('Operator',     s:white,      s:none,       'NONE')
     call s:hi('Todo',         s:br_yellow,  s:black,      'NONE')
-    call s:hi('Error',        s:br_red,     s:none,       'bold')
+    call s:hi('Error',        s:error,      s:none,       'bold')
     call s:hi('Type',         s:br_yellow,  s:none,       'NONE')
     call s:hi('StorageClass', s:br_yellow,  s:none,       'NONE')
     call s:hi('Typedef',      s:br_yellow,  s:none,       'NONE')
@@ -248,12 +249,12 @@ endif
     call s:hi('Title',        s:br_yellow,  s:none,       'bold')
     call s:hi('MoreMsg',      s:yellow,     s:none,       'bold')
     call s:hi('Question',     s:br_yellow,  s:none,       'bold,reverse')
-    call s:hi('Warning',      s:yellow,     s:none,       'NONE')
+    call s:hi('Warning',      s:warning,    s:none,       'NONE')
 
     call s:hi('Folded',       s:white,      s:black,      'NONE')
-    call s:hi('SignColumn',   s:white,      s:hard_black, 'NONE')
-    call s:hi('LineNr',       s:dark,       s:darkest,    'NONE')
-    call s:hi('CursorLineNr', s:dark,       s:black,      'bold')
+    call s:hi('SignColumn',   s:white,      s:black, 'NONE')
+    call s:hi('LineNr',       s:dark,       s:black,      'NONE')
+    call s:hi('CursorLineNr', s:dark,       s:blacker,    'bold')
     call s:hi('DiffDelete',   s:light,      s:br_red,     'NONE')
     call s:hi('DiffAdd',      s:light,      s:br_green,   'NONE')
     call s:hi('DiffChange',   s:light,      s:br_yellow,  'NONE')
@@ -263,14 +264,22 @@ endif
     call s:hi('TabLineFill',  s:light,      s:darker,     'NONE')
     call s:hi('TabLineSel',   s:br_white,   s:black,      'bold')
 
+    call s:hi('DiagnosticError', s:error, s:none, 'NONE')
+    call s:hi('DiagnosticWarn', s:warning, s:none, 'NONE')
+    call s:hi('DiagnosticInfo', s:white, s:none, 'NONE')
+    call s:hi('DiagnosticHint', s:white, s:none, 'NONE')
+
     " Dirvish
     call s:hi('DirvishSuffix', s:light, s:none, 'NONE')
 
     " coc.nvim
     call s:hi('CocMenuSel', s:black, s:magenta, 'bold')
-    exec 'hi CocErrorHighlight guibg=' .. s:error .. " gui='underline'"
-    exec 'hi CocWarningHighlight guibg=' .. s:warning .. " gui='underline'"
-    exec 'hi CocInfoHighlight guibg=' .. s:info .. " gui='underline'"
+    exec 'hi CocErrorHighlight guifg=' .. s:error[0]
+                \ ..' ctermfg=' .. s:error[1] .. " gui='bold'"
+    exec 'hi CocWarningHighlight guifg=' .. s:warning[0]
+                \ .. ' ctermfg=' .. s:warning[1] .. " gui='bold'"
+    exec 'hi CocInfoHighlight guibg=' .. s:info[0] .. ' ctermfg=' s:info[1]
+    exec 'hi CocHintHighlight guibg=' .. s:hint[0] .. ' ctermfg=' s:hint[1]
 
     " vim-gitgutter
     call s:hi('GitGutterDeleteLine',       s:dark, s:br_red,    'NONE')
