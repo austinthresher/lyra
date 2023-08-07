@@ -232,13 +232,13 @@ endif
     call s:hi('Visual', s:hard_black, s:blue, 'NONE')
     hi! link VisualNOS Visual
 
-    call s:hi('Search', s:hard_black, s:light, 'NONE')
-    call s:hi('IncSearch', s:hard_black, s:br_yellow, 'NONE')
+    call s:hi('Search',       s:none,     s:dark, 'NONE')
+    call s:hi('IncSearch',    s:hard_black, s:br_yellow, 'NONE')
 
     call s:hi('Pmenu',        s:white,      s:hard_black, 'NONE')
     call s:hi('PmenuSel',     s:black,      s:magenta,    'bold')
 
-    call s:hi('MatchParen',   s:none,       s:hard_black, 'bold,underline')
+    call s:hi('MatchParen',   s:none,       s:dark,       'bold')
     call s:hi('Conceal',      s:dark,       s:none,       'NONE')
     call s:hi('StatusLine',   s:br_white,   s:darker,     'NONE')
     call s:hi('StatusLineNC', s:dark,       s:darkest,    'NONE')
@@ -297,6 +297,10 @@ endif
     call s:hi('ConflictMarkerSeparator', s:yellow,  s:none,       'bold')
     call s:hi('ConflictMarkerTheirs',    s:none,    s:hard_black, 'NONE')
     call s:hi('ConflictMarkerEnd',       s:br_magenta, s:none,       'bold')
+
+    " sneak
+    call s:hi('Sneak', s:none, s:br_black, 'bold')
+    call s:hi('SneakScope', s:br_black, s:hard_black, 'NONE')
 
     if has('spell')
         call s:hi('SpellCap',   s:none, s:magenta, 'underline')
