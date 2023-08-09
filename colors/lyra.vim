@@ -186,7 +186,7 @@ if exists('g:lyra_no_highlighting') && g:lyra_no_highlighting
         call s:hi(group, s:none, s:none, 'NONE')
     endfor
 else
-    call s:hi('Comment', s:green, s:none, 'italic')
+    call s:hi('Comment', s:green, s:none, 'NONE')
     for group in ['Character', 'Boolean', 'Number', 'Float']
         call s:hi(group, s:br_red, s:none, 'NONE')
     endfor
