@@ -119,21 +119,21 @@ if exists('g:lyra_use_v1_colors') && g:lyra_use_v1_colors
     let s:lightest   = ['#BCBCBC', s:xterm_lightest]
 else
     " Version 2 colors. Tried to be easier on the eyes and more subtle / desat
-    let s:black      = ['#121214', s:xterm_black]
+    let s:black      = ['#101014', s:xterm_black]
     let s:red        = ['#8C2D2D', s:xterm_red]
     let s:green      = ['#608860', s:xterm_green]
     let s:yellow     = ['#D3944D', s:xterm_yellow]
     let s:blue       = ['#3B7EAA', s:xterm_blue]
-    let s:magenta    = ['#987CDA', s:xterm_magenta]
+    let s:magenta    = ['#A88CEA', s:xterm_magenta]
     let s:cyan       = ['#1CB38B', s:xterm_cyan]
     let s:white      = ['#A0A0A0', s:xterm_white]
     let s:br_black   = ['#5F5F5F', s:xterm_br_black]
     let s:br_red     = ['#D37474', s:xterm_br_red]
     let s:br_green   = ['#76DE94', s:xterm_br_green]
-    let s:br_yellow  = ['#EAC871', s:xterm_br_yellow]
-    let s:br_blue    = ['#82CBFE', s:xterm_br_blue]
+    let s:br_yellow  = ['#FAE088', s:xterm_br_yellow]
+    let s:br_blue    = ['#88CFFE', s:xterm_br_blue]
     let s:br_magenta = ['#DE95DE', s:xterm_br_magenta]
-    let s:br_cyan    = ['#5BEBEB', s:xterm_br_cyan]
+    let s:br_cyan    = ['#8BE8E0', s:xterm_br_cyan]
     let s:br_white   = ['#EEEEEE', s:xterm_br_white]
 
     let s:blacker    = ['#08080A', s:xterm_blacker]
@@ -151,7 +151,7 @@ let s:hint = ["#0E0E0E", 7]
 let s:info = ["#0E0E0E", 7]
 let s:warning = ["#FFFF00", 11]
 let s:error = ["#FF0000", 9]
-
+let s:unused = s:br_red
 let s:none = ['NONE', 'NONE']
 
 
@@ -208,8 +208,8 @@ else
     call s:hi('Error',        s:error,      s:none,       'bold')
     call s:hi('Type',         s:br_yellow,  s:none,       'NONE')
     call s:hi('StorageClass', s:br_yellow,  s:none,       'NONE')
-    call s:hi('Typedef',      s:br_yellow,  s:none,       'NONE')
-    call s:hi('Structure',    s:br_yellow,  s:none,       'NONE')
+    call s:hi('Typedef',      s:br_cyan,     s:none,       'NONE')
+    call s:hi('Structure',    s:br_cyan,     s:none,       'NONE')
     call s:hi('Delimiter',    s:white,      s:none,       'NONE')
     call s:hi('Identifier',   s:br_white,   s:none,       'NONE')
     call s:hi('PreProc',      s:yellow,     s:none,       'NONE')
@@ -273,6 +273,7 @@ endif
     call s:hi('DirvishSuffix', s:light, s:none, 'NONE')
 
     " coc.nvim
+    " Not using s:hi for these so that we only overwrite part of the style
     call s:hi('CocMenuSel', s:black, s:magenta, 'bold')
     exec 'hi CocErrorHighlight guifg=' .. s:error[0]
                 \ ..' ctermfg=' .. s:error[1] .. " gui='bold'"
@@ -280,6 +281,9 @@ endif
                 \ .. ' ctermfg=' .. s:warning[1] .. " gui='bold'"
     exec 'hi CocInfoHighlight guibg=' .. s:info[0] .. ' ctermfg=' s:info[1]
     exec 'hi CocHintHighlight guibg=' .. s:hint[0] .. ' ctermfg=' s:hint[1]
+    exec 'hi CocUnusedHighlight guifg=' .. s:unused[0] .. ' ctermfg=' s:unused[1]
+    " Make classes/structs/enums highlight consistently as types in C/C++
+    call s:hi('@constructor', s:br_yellow, s:none, 'NONE')
 
     " vim-gitgutter
     call s:hi('GitGutterDeleteLine',       s:dark, s:br_red,    'NONE')
